@@ -46,12 +46,12 @@ model oms_Order {
   orderItems oms_OrderItem[]
 }
 
-model OrderItem {
+model oms_OrderItem {
   id        Int      @id @default(autoincrement())
   orderId   Int
-  order     Order    @relation(fields: [orderId], references: [id])
+  order     oms_Order    @relation(fields: [orderId], references: [id])
   productId Int
-  product   Product  @relation(fields: [productId], references: [id])
+  product   oms_Product  @relation(fields: [productId], references: [id])
   quantity  Int
   price     Decimal
 }
