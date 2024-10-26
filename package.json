@@ -1,0 +1,31 @@
+{
+    "name": "portfolio-db",
+    "version": "0.0.1",
+    "description": "Package for Prisma client DB",
+    "main": "index.ts",
+    "scripts": {
+        "generate": "npx prisma generate",
+        "migrate": "npx prisma migrate dev",
+        "studio": "npx prisma studio",
+        "postinstall": "npx prisma generate"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/barronbud/portfolio-db.git"
+    },
+    "author": "Jeffrey Barron",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/barronbud/portfolio-db/issues"
+    },
+    "homepage": "https://github.com/barronbud/portfolio-db#readme",
+    "devDependencies": {
+        "@types/node": "^22.8.1",
+        "prisma": "^5.21.1",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.6.3"
+    },
+    "dependencies": {
+        "@prisma/client": "^5.21.1"
+    }
+}
