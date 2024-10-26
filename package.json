@@ -1,5 +1,5 @@
 {
-    "name": "portfolio-db",
+    "name": "@jeffreybarron/portfolio-db",
     "version": "0.0.2",
     "description": "Package for Prisma client DB",
     "main": "index.ts",
