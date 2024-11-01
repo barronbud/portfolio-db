@@ -6,16 +6,17 @@ const prisma = new PrismaClient();
 
 async function main() {
     // Create 20 users
-    const users = [];
+    const customers = [];
     for (let i = 0; i < 20; i++) {
-        const user = await prisma.oms_User.create({
+        const customer = await prisma.oms_Customer.create({
             data: {
                 email: faker.internet.email(),
-                name: faker.person.fullName(),
+                firstName: faker.person.firstName(),
+                lastName: faker.person.lastName(),
                 password: await hash("password123", 10),
             },
         });
-        users.push(user);
+        customers.push(customer);
     }
 
     // Create 30 products
@@ -56,7 +57,7 @@ async function main() {
         // Create the order with its items
         await prisma.oms_Order.create({
             data: {
-                userId: faker.helpers.arrayElement(users).id,
+                customerId: faker.helpers.arrayElement(customers).id,
                 status: faker.helpers.arrayElement([
                     "pending",
                     "processing",

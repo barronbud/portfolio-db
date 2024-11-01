@@ -14,10 +14,11 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model oms_User {
+model oms_Customer {
   id        Int         @id @default(autoincrement())
   email     String      @unique
-  name      String
+  firstName String
+  lastName  String
   password  String
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
@@ -37,8 +38,8 @@ model oms_Product {
 
 model oms_Order {
   id         Int             @id @default(autoincrement())
-  userId     Int
-  user       oms_User        @relation(fields: [userId], references: [id])
+  customerId Int
+  customer   oms_Customer  @relation(fields: [customerId], references: [id])
   status     String
   total      Decimal
   createdAt  DateTime        @default(now())
