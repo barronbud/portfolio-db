@@ -14,6 +14,11 @@ async function main() {
                 firstName: faker.person.firstName(),
                 lastName: faker.person.lastName(),
                 password: await hash("password123", 10),
+                address: faker.location.streetAddress(),
+                city: faker.location.city(),
+                state: faker.location.state(),
+                zip: faker.location.zipCode(),
+                phone: faker.phone.number(),
             },
         });
         customers.push(customer);
@@ -28,6 +33,7 @@ async function main() {
                 description: faker.commerce.productDescription(),
                 price: parseFloat(faker.commerce.price({ min: 10, max: 1000 })),
                 stock: faker.number.int({ min: 0, max: 1000 }),
+                sku: faker.commerce.product(),
             },
         });
         products.push(product);

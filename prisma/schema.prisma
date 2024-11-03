@@ -1,17 +1,11 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model oms_Customer {
@@ -22,6 +16,11 @@ model oms_Customer {
   password  String
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
+  address   String?
+  city      String?
+  phone     String?
+  state     String?
+  zip       String?
   orders    oms_Order[]
 }
 
@@ -33,26 +32,29 @@ model oms_Product {
   stock       Int
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
+  sku         String?
   orderItems  oms_OrderItem[]
 }
 
 model oms_Order {
   id         Int             @id @default(autoincrement())
-  customerId Int
-  customer   oms_Customer  @relation(fields: [customerId], references: [id])
   status     String
-  total      Decimal
+  total      Decimal         @default(0)
   createdAt  DateTime        @default(now())
   updatedAt  DateTime        @updatedAt
+  customerId Int
+  shipping   Decimal         @default(0)
+  tax        Decimal         @default(0)
+  customer   oms_Customer    @relation(fields: [customerId], references: [id])
   orderItems oms_OrderItem[]
 }
 
 model oms_OrderItem {
-  id        Int      @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   orderId   Int
-  order     oms_Order    @relation(fields: [orderId], references: [id])
   productId Int
-  product   oms_Product  @relation(fields: [productId], references: [id])
   quantity  Int
   price     Decimal
+  order     oms_Order   @relation(fields: [orderId], references: [id])
+  product   oms_Product @relation(fields: [productId], references: [id])
 }
