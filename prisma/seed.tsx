@@ -33,7 +33,7 @@ async function main() {
                 description: faker.commerce.productDescription(),
                 price: parseFloat(faker.commerce.price({ min: 10, max: 1000 })),
                 stock: faker.number.int({ min: 0, max: 1000 }),
-                sku: faker.commerce.product(),
+                sku: faker.commerce.isbn(),
             },
         });
         products.push(product);
@@ -59,6 +59,13 @@ async function main() {
 
             total += price * quantity;
         }
+        const shipping = faker.number.float({
+            min: 0,
+            max: 10,
+            fractionDigits: 2,
+        });
+        const tax = faker.number.float({ min: 0, max: 10, fractionDigits: 2 });
+        total += shipping + tax;
 
         // Create the order with its items
         await prisma.oms_Order.create({
@@ -70,6 +77,8 @@ async function main() {
                     "completed",
                     "cancelled",
                 ]),
+                shipping: shipping,
+                tax: tax,
                 total: total,
                 orderItems: {
                     create: orderItems,
