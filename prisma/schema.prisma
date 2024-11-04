@@ -44,15 +44,15 @@ model oms_Customer {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   /// @zod.min(1, { message: "Address is required" })
-  address   String?
+  address   String
   /// @zod.min(1, { message: "City is required" })
-  city      String?
+  city      String
   /// @zod.min(1, { message: "Phone number is required" })
-  phone     String?
+  phone     String
   /// @zod.min(1, { message: "State is required" })
-  state     String?
+  state     String
   /// @zod.min(1, { message: "Zip code is required" }).max(5, {message: "Zip code must be 5 digits"})
-  zip       String?
+  zip       String
   orders    oms_Order[]
 }
 
