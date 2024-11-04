@@ -10,3 +10,5 @@ export const createContext = async (ctx: any): Promise<any> => {
         prisma,
     };
 };
+
+export * from "../prisma/zod";

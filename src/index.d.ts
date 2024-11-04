@@ -7,3 +7,5 @@ export * from "@prisma/client";
 export interface Context {
     prisma: PrismaClient;
 }
+
+export * from "../prisma/zod";
