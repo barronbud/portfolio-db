@@ -32,16 +32,20 @@ datasource db {
 // });
 
 model oms_Customer {
-  id        Int         @id @default(autoincrement())
-  /// @zod.email
+  /// @zod.optional()
+  id        String         @id @default(cuid())
+  /// @zod.min(1, { message: "Email is required" })
+  /// @zod.email({ message: "Invalid email address" })
   email     String      @unique
   /// @zod.min(1, { message: "First name is required" })
   firstName String
   /// @zod.min(1, { message: "Last name is required" })
   lastName  String
-  /// @zod.min(1, { message: "Password is required" })
+  /// @zod.optional()
   password  String
+  /// @zod.optional()
   createdAt DateTime    @default(now())
+  /// @zod.optional()
   updatedAt DateTime    @updatedAt
   /// @zod.min(1, { message: "Address is required" })
   address   String
@@ -57,35 +61,56 @@ model oms_Customer {
 }
 
 model oms_Product {
-  id          Int             @id @default(autoincrement())
+  /// @zod.optional()
+  id          String             @id @default(cuid())
+  /// @zod.min(1, { message: "Name is required" })
   name        String
+  /// @zod.optional()
   description String
+  /// @zod.positive({ message: "Price must be greater than 0" })
   price       Decimal
+  /// @zod.int({ message: "Stock is required" }).positive({ message: "Stock must be greater than 0" })
   stock       Int
+  /// @zod.optional()
   createdAt   DateTime        @default(now())
+  /// @zod.optional()
   updatedAt   DateTime        @updatedAt
+  /// @zod.optional()
   sku         String?
   orderItems  oms_OrderItem[]
 }
 
 model oms_Order {
-  id         Int             @id @default(autoincrement())
+  /// @zod.optional()
+  id         String             @id @default(cuid())
+  /// @zod.min(1, { message: "Status is required" })
   status     String
+  /// @zod.positive({ message: "Total must be greater than 0" })
   total      Decimal         @default(0)
+  /// @zod.optional()
   createdAt  DateTime        @default(now())
+  /// @zod.optional()
   updatedAt  DateTime        @updatedAt
-  customerId Int
+  /// @zod.min(1, { message: "Customer ID is required" })
+  customerId String
+  /// @zod.nonnegative({ message: "Shipping must be greater than or equal to 0" })
   shipping   Decimal         @default(0)
+  /// @zod.nonnegative({ message: "Tax must be greater than or equal to 0" })
   tax        Decimal         @default(0)
   customer   oms_Customer    @relation(fields: [customerId], references: [id])
   orderItems oms_OrderItem[]
 }
 
 model oms_OrderItem {
-  id        Int         @id @default(autoincrement())
-  orderId   Int
-  productId Int
+  /// @zod.optional()
+  id        String             @id @default(cuid())
+  /// @zod.min(1, { message: "Order ID is required" })
+  orderId   String
+  /// @zod.min(1, { message: "Product ID is required" })
+  productId String
+  /// @zod.int({ message: "Quantity is required" }).positive({ message: "Quantity must be greater than 0" })
   quantity  Int
+  /// @zod.positive({ message: "Price must be greater than 0" })
   price     Decimal
   order     oms_Order   @relation(fields: [orderId], references: [id])
   product   oms_Product @relation(fields: [productId], references: [id])
