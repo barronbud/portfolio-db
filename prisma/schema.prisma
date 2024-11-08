@@ -18,19 +18,6 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-// const CustomerSchema = oms_CustomerModel.schema.extend({
-//     firstName: z.string().min(1, { message: "First name is required" }),
-//     lastName: z.string().min(1, { message: "Last name is required" }),
-//     email: z.string().email({ message: "Invalid email address" }),
-//     phone: z.string().min(1, { message: "Phone number is required" }),
-//     address: z.string().min(1, { message: "Address is required" }),
-//     city: z.string().min(1, { message: "City is required" }),
-//     state: z.string().min(1, { message: "State is required" }),
-//     zip: z.string().min(1, { message: "Zip code is required" }).max(5, {
-//         message: "Zip code must be 5 digits",
-//     }),
-// });
-
 model oms_Customer {
   /// @zod.optional()
   id        String         @id @default(cuid())
@@ -41,8 +28,6 @@ model oms_Customer {
   firstName String
   /// @zod.min(1, { message: "Last name is required" })
   lastName  String
-  /// @zod.optional()
-  password  String
   /// @zod.optional()
   createdAt DateTime    @default(now())
   /// @zod.optional()

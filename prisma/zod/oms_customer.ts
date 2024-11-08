@@ -6,7 +6,6 @@ export const oms_CustomerModel = z.object({
   email: z.string().min(1, { message: "Email is required" }).email({ message: "Invalid email address" }),
   firstName: z.string().min(1, { message: "First name is required" }),
   lastName: z.string().min(1, { message: "Last name is required" }),
-  password: z.string().optional(),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
   address: z.string().min(1, { message: "Address is required" }),
