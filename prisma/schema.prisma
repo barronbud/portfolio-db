@@ -42,6 +42,8 @@ model oms_Customer {
   state     String
   /// @zod.min(1, { message: "Zip code is required" }).max(5, {message: "Zip code must be 5 digits"})
   zip       String
+  /// @zod.optional()
+  isActive  Boolean          @default(true)
   orders    oms_Order[]
 }
 

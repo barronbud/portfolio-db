@@ -13,6 +13,7 @@ export const oms_CustomerModel = z.object({
   phone: z.string().min(1, { message: "Phone number is required" }),
   state: z.string().min(1, { message: "State is required" }),
   zip: z.string().min(1, { message: "Zip code is required" }).max(5, { message: "Zip code must be 5 digits" }),
+  isActive: z.boolean().optional(),
 })
 
 export interface Completeoms_Customer extends z.infer<typeof oms_CustomerModel> {
