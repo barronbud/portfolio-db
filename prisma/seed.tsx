@@ -14,7 +14,7 @@ async function main() {
                 lastName: faker.person.lastName(),
                 address: faker.location.streetAddress(),
                 city: faker.location.city(),
-                state: faker.location.state(),
+                state: faker.location.state({ abbreviated: true }),
                 zip: faker.location.zipCode(),
                 phone: faker.phone.number(),
             },

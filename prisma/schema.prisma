@@ -56,7 +56,7 @@ model oms_Product {
   description String
   /// @zod.positive({ message: "Price must be greater than 0" })
   price       Int
-  /// @zod.int({ message: "Stock is required" }).positive({ message: "Stock must be greater than 0" })
+  /// @zod.positive({ message: "Stock must be greater than 0" })
   stock       Int
   /// @zod.optional()
   createdAt   DateTime        @default(now())
@@ -95,7 +95,7 @@ model oms_OrderItem {
   orderId   String
   /// @zod.min(1, { message: "Product ID is required" })
   productId String
-  /// @zod.int({ message: "Quantity is required" }).positive({ message: "Quantity must be greater than 0" })
+  /// @zod.positive({ message: "Quantity must be greater than 0" })
   quantity  Int
   /// @zod.positive({ message: "Price must be greater than 0" })
   price     Int
