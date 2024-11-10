@@ -29,7 +29,10 @@ async function main() {
             data: {
                 name: faker.commerce.productName(),
                 description: faker.commerce.productDescription(),
-                price: parseFloat(faker.commerce.price({ min: 10, max: 1000 })),
+                price: Math.round(
+                    parseFloat(faker.commerce.price({ min: 10, max: 1000 })) *
+                        100
+                ),
                 stock: faker.number.int({ min: 0, max: 1000 }),
                 sku: faker.commerce.isbn(),
             },
@@ -47,7 +50,9 @@ async function main() {
         for (let j = 0; j < numItems; j++) {
             const product = faker.helpers.arrayElement(products);
             const quantity = faker.number.int({ min: 1, max: 5 });
-            const price = parseFloat(product.price.toString());
+            const price = Math.round(
+                parseFloat(product.price.toString()) * 100
+            );
 
             orderItems.push({
                 productId: product.id,
@@ -57,12 +62,16 @@ async function main() {
 
             total += price * quantity;
         }
-        const shipping = faker.number.float({
-            min: 0,
-            max: 10,
-            fractionDigits: 2,
-        });
-        const tax = faker.number.float({ min: 0, max: 10, fractionDigits: 2 });
+        const shipping = Math.round(
+            faker.number.float({
+                min: 0,
+                max: 10,
+                fractionDigits: 2,
+            }) * 100
+        );
+        const tax = Math.round(
+            faker.number.float({ min: 0, max: 10, fractionDigits: 2 }) * 100
+        );
         total += shipping + tax;
 
         // Create the order with its items

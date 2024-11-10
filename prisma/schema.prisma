@@ -55,7 +55,7 @@ model oms_Product {
   /// @zod.min(1, { message: "Description is required" })
   description String
   /// @zod.positive({ message: "Price must be greater than 0" })
-  price       Decimal
+  price       Int
   /// @zod.int({ message: "Stock is required" }).positive({ message: "Stock must be greater than 0" })
   stock       Int
   /// @zod.optional()
@@ -73,7 +73,7 @@ model oms_Order {
   /// @zod.min(1, { message: "Status is required" })
   status     String
   /// @zod.positive({ message: "Total must be greater than 0" })
-  total      Decimal         @default(0)
+  total      Int              @default(0)
   /// @zod.optional()
   createdAt  DateTime        @default(now())
   /// @zod.optional()
@@ -81,9 +81,9 @@ model oms_Order {
   /// @zod.min(1, { message: "Customer ID is required" })
   customerId String
   /// @zod.nonnegative({ message: "Shipping must be greater than or equal to 0" })
-  shipping   Decimal         @default(0)
+  shipping   Int             @default(0)
   /// @zod.nonnegative({ message: "Tax must be greater than or equal to 0" })
-  tax        Decimal         @default(0)
+  tax        Int             @default(0)
   customer   oms_Customer    @relation(fields: [customerId], references: [id])
   orderItems oms_OrderItem[]
 }
@@ -98,7 +98,7 @@ model oms_OrderItem {
   /// @zod.int({ message: "Quantity is required" }).positive({ message: "Quantity must be greater than 0" })
   quantity  Int
   /// @zod.positive({ message: "Price must be greater than 0" })
-  price     Decimal
+  price     Int
   order     oms_Order   @relation(fields: [orderId], references: [id])
   product   oms_Product @relation(fields: [productId], references: [id])
 }

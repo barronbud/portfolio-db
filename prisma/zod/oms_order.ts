@@ -4,12 +4,12 @@ import { Completeoms_Customer, Relatedoms_CustomerModel, Completeoms_OrderItem, 
 export const oms_OrderModel = z.object({
   id: z.string().optional(),
   status: z.string().min(1, { message: "Status is required" }),
-  total: z.number().positive({ message: "Total must be greater than 0" }),
+  total: z.number().int().positive({ message: "Total must be greater than 0" }),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
   customerId: z.string().min(1, { message: "Customer ID is required" }),
-  shipping: z.number().nonnegative({ message: "Shipping must be greater than or equal to 0" }),
-  tax: z.number().nonnegative({ message: "Tax must be greater than or equal to 0" }),
+  shipping: z.number().int().nonnegative({ message: "Shipping must be greater than or equal to 0" }),
+  tax: z.number().int().nonnegative({ message: "Tax must be greater than or equal to 0" }),
 })
 
 export interface Completeoms_Order extends z.infer<typeof oms_OrderModel> {

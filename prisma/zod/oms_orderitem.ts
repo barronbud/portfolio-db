@@ -6,7 +6,7 @@ export const oms_OrderItemModel = z.object({
   orderId: z.string().min(1, { message: "Order ID is required" }),
   productId: z.string().min(1, { message: "Product ID is required" }),
   quantity: z.number().int().int({ message: "Quantity is required" }).positive({ message: "Quantity must be greater than 0" }),
-  price: z.number().positive({ message: "Price must be greater than 0" }),
+  price: z.number().int().positive({ message: "Price must be greater than 0" }),
 })
 
 export interface Completeoms_OrderItem extends z.infer<typeof oms_OrderItemModel> {
