@@ -50,9 +50,7 @@ async function main() {
         for (let j = 0; j < numItems; j++) {
             const product = faker.helpers.arrayElement(products);
             const quantity = faker.number.int({ min: 1, max: 5 });
-            const price = Math.round(
-                parseFloat(product.price.toString()) * 100
-            );
+            const price = parseInt(product.price.toString());
 
             orderItems.push({
                 productId: product.id,
