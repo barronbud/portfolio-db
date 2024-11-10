@@ -64,6 +64,8 @@ model oms_Product {
   updatedAt   DateTime        @updatedAt
   /// @zod.min(1, { message: "SKU is required" })
   sku         String
+  /// @zod.optional()
+  isActive    Boolean         @default(true)
   orderItems  oms_OrderItem[]
 }
 
