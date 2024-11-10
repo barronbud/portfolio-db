@@ -9,7 +9,7 @@ export const oms_ProductModel = z.object({
   stock: z.number().int().int({ message: "Stock is required" }).positive({ message: "Stock must be greater than 0" }),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
-  sku: z.string().optional().nullish(),
+  sku: z.string().min(1, { message: "SKU is required" }),
 })
 
 export interface Completeoms_Product extends z.infer<typeof oms_ProductModel> {

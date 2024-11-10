@@ -62,8 +62,8 @@ model oms_Product {
   createdAt   DateTime        @default(now())
   /// @zod.optional()
   updatedAt   DateTime        @updatedAt
-  /// @zod.optional()
-  sku         String?
+  /// @zod.min(1, { message: "SKU is required" })
+  sku         String
   orderItems  oms_OrderItem[]
 }
 
