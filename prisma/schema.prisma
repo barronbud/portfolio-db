@@ -52,7 +52,7 @@ model oms_Product {
   id          String             @id @default(cuid())
   /// @zod.min(1, { message: "Name is required" })
   name        String
-  /// @zod.optional()
+  /// @zod.min(1, { message: "Description is required" })
   description String
   /// @zod.positive({ message: "Price must be greater than 0" })
   price       Decimal

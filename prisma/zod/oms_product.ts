@@ -4,7 +4,7 @@ import { Completeoms_OrderItem, Relatedoms_OrderItemModel } from "./index"
 export const oms_ProductModel = z.object({
   id: z.string().optional(),
   name: z.string().min(1, { message: "Name is required" }),
-  description: z.string().optional(),
+  description: z.string().min(1, { message: "Description is required" }),
   price: z.number().positive({ message: "Price must be greater than 0" }),
   stock: z.number().int().int({ message: "Stock is required" }).positive({ message: "Stock must be greater than 0" }),
   createdAt: z.date().optional(),
