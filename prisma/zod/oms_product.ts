@@ -2,7 +2,7 @@ import * as z from "zod";
 import { Completeoms_OrderItem, Relatedoms_OrderItemModel } from "./index";
 
 export const oms_ProductModel = z.object({
-    id: z.string().optional(),
+    id: z.string(),
     name: z.string().min(1, { message: "Name is required" }),
     description: z.string().min(1, { message: "Description is required" }),
     price: z.coerce

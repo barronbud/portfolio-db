@@ -7,9 +7,7 @@ import {
 } from "./index";
 
 export const oms_OrderItemModel = z.object({
-    id: z.string().optional(),
-    orderId: z.string().min(1, { message: "Order ID is required" }),
-    productId: z.string().min(1, { message: "Product ID is required" }),
+    id: z.string(),
     quantity: z.coerce
         .number()
         .positive({ message: "Quantity must be greater than 0" }),
