@@ -1,10 +1,5 @@
 import * as z from "zod";
-import {
-    Completeoms_Order,
-    Relatedoms_OrderModel,
-    Completeoms_Product,
-    Relatedoms_ProductModel,
-} from "./index";
+import { Completeoms_Product, Relatedoms_ProductModel } from "./index";
 
 export const oms_OrderItemModel = z.object({
     id: z.string(),
@@ -18,7 +13,6 @@ export const oms_OrderItemModel = z.object({
 
 export interface Completeoms_OrderItem
     extends z.infer<typeof oms_OrderItemModel> {
-    order: Completeoms_Order;
     product: Completeoms_Product;
 }
 
@@ -30,7 +24,6 @@ export interface Completeoms_OrderItem
 export const Relatedoms_OrderItemModel: z.ZodSchema<Completeoms_OrderItem> =
     z.lazy(() =>
         oms_OrderItemModel.extend({
-            order: Relatedoms_OrderModel,
             product: Relatedoms_ProductModel,
         })
     );

@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { Completeoms_Order, Relatedoms_OrderModel } from "./index";
 
 export const oms_CustomerModel = z.object({
     id: z.string(),
@@ -23,9 +22,7 @@ export const oms_CustomerModel = z.object({
 });
 
 export interface Completeoms_Customer
-    extends z.infer<typeof oms_CustomerModel> {
-    orders: Completeoms_Order[];
-}
+    extends z.infer<typeof oms_CustomerModel> {}
 
 /**
  * Relatedoms_CustomerModel contains all relations on your model in addition to the scalars
@@ -33,8 +30,4 @@ export interface Completeoms_Customer
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const Relatedoms_CustomerModel: z.ZodSchema<Completeoms_Customer> =
-    z.lazy(() =>
-        oms_CustomerModel.extend({
-            orders: Relatedoms_OrderModel.array(),
-        })
-    );
+    z.lazy(() => oms_CustomerModel);
