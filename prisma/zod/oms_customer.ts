@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 export const oms_CustomerModel = z.object({
-    id: z.string(),
+    id: z.string().optional(),
     email: z
         .string()
         .min(1, { message: "Email is required" })
@@ -17,7 +17,7 @@ export const oms_CustomerModel = z.object({
     zip: z
         .string()
         .min(1, { message: "Zip code is required" })
-        .max(5, { message: "Zip code must be 5 digits" }),
+        .max(10, { message: "Zip code must be less than 10 digits" }),
     isActive: z.boolean().optional(),
 });
 
