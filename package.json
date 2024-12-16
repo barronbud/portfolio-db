@@ -1,6 +1,6 @@
 {
     "name": "@jeffreyabarron/portfolio-db",
-    "version": "0.1.22",
+    "version": "0.1.23",
     "description": "Package for Prisma client DB",
     "main": "index.ts",
     "scripts": {
@@ -33,7 +33,7 @@
     },
     "dependencies": {
         "@faker-js/faker": "^9.3.0",
-        "@prisma/client": "^5.22.0",
+        "@prisma/client": "^6.0.1",
         "prisma": "^6.0.1",
         "zod-prisma": "^0.5.4"
     }
