@@ -69,3 +69,39 @@ model oms_OrderItem {
   order     oms_Order   @relation(fields: [orderId], references: [id])
   product   oms_Product @relation(fields: [productId], references: [id])
 }
+
+// ledger
+model ledger_User {
+  id        String             @id @default(cuid())
+  email     String             @unique
+  firstName String
+  lastName  String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  transactions ledger_Transaction[]
+}
+
+model ledger_Transaction {
+  id        String             @id @default(cuid())
+  amount    Int
+  date      DateTime
+  merchantId String
+  categoryId String
+  userId     String
+  merchant  ledger_Merchant @relation(fields: [merchantId], references: [id])
+  category  ledger_Category @relation(fields: [categoryId], references: [id])
+  user      ledger_User     @relation(fields: [userId], references: [id])
+}
+
+model ledger_Category {
+  id        String             @id @default(cuid())
+  name      String
+  transactions ledger_Transaction[]
+}
+
+model ledger_Merchant {
+  id        String             @id @default(cuid())
+  name      String
+  isFlagged Boolean            @default(false)
+  transactions ledger_Transaction[]
+}

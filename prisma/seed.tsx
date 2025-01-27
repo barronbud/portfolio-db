@@ -91,6 +91,54 @@ async function main() {
             },
         });
     }
+
+    // Create 10 users
+    const users = [];
+    for (let i = 0; i < 10; i++) {
+        const user = await prisma.ledger_User.create({
+            data: {
+                email: faker.internet.email(),
+                firstName: faker.person.firstName(),
+                lastName: faker.person.lastName(),
+            },
+        });
+        users.push(user);
+    }
+
+    // Create 10 merchants
+    const merchants = [];
+    for (let i = 0; i < 10; i++) {
+        const merchant = await prisma.ledger_Merchant.create({
+            data: {
+                name: faker.company.name(),
+            },
+        });
+        merchants.push(merchant);
+    }
+
+    // Create 10 categories
+    const categories = [];
+    for (let i = 0; i < 10; i++) {
+        const category = await prisma.ledger_Category.create({
+            data: {
+                name: faker.commerce.department(),
+            },
+        });
+        categories.push(category);
+    }
+
+    // Create 100 transactions
+    for (let i = 0; i < 100; i++) {
+        const transaction = await prisma.ledger_Transaction.create({
+            data: {
+                amount: faker.number.int({ min: 100, max: 1000 }),
+                date: faker.date.recent(),
+                merchantId: faker.helpers.arrayElement(merchants).id,
+                categoryId: faker.helpers.arrayElement(categories).id,
+                userId: faker.helpers.arrayElement(users).id,
+            },
+        });
+    }
 }
 
 main()
